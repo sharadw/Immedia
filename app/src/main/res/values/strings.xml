@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">SuperHero App</string>
+    //permission
+    <string name="enable_permission">Enable Permission</string>
+    <string name="grant_call_permission_message">Call Phone access permission is required in order to make call</string>
+    <string name="microphone_permission_message">Microphone access is required in order to record audio</string>
+    <string name="camera_permission_message">Camera access permission is required in order to capture photo</string>
+    <string name="sms_permission_message">SMS access permission is required in order to capture OTP</string>
+    <string name="location_permission_message">Location permission is required, TO make your experience better</string>
+    <string name="read_external_storage_permission_message">Read External Storage access permission is required in order to store captured photo, store recorded audio</string>
+    <string name="loading">Loding...</string>
+
+    <string name="server_error_title">Your request could not be completed</string>
+    <string name="server_error_message">An unforeseen error was encountered on the server.</string>
+    <string name="server_error_message_no_contact_no">An unforeseen error was encountered on the server.</string>
+    <string name="super_hero_search">Search for your favorite Super Hero</string>
+    <string name="super_hero_name_id">Input super hero name or id</string>
+    <string name="search">Search</string>
+    <string name="power_stats">Powerstats</string>
+    <string name="intelligence">Intelligence</string>
+    <string name="strength">Strength</string>
+    <string name="speed">Speed</string>
+    <string name="durability">Durability</string>
+    <string name="power">Power</string>
+    <string name="combat">Combat</string>
+    <string name="full_Name">Full Name</string>
+    <string name="place_Birth">Place 0f Birth</string>
+    <string name="publisher">Publisher</string>
+    <string name="gender">Gender</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="biography">Biography</string>
+    <string name="recent_search">Recent Search</string>
+
+</resources>

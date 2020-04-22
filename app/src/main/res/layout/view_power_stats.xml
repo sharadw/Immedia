@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvMood"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/medium_margin"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/medium_margin">
+
+        <TextView
+            android:id="@+id/tvSectionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/din_bold"
+            android:text="@string/power_stats"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/header_text_size" />
+
+        <za.co.immedia.component.GoalProgress
+            android:id="@+id/pbIntelligence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:multiply_progress_active_label_text="@string/intelligence"
+            app:multiply_progress_active_text="Task" />
+
+        <za.co.immedia.component.GoalProgress
+            android:id="@+id/pbStrength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:multiply_progress_active_label_text="@string/strength"
+            app:multiply_progress_active_text="Task" />
+
+        <za.co.immedia.component.GoalProgress
+            android:id="@+id/pbSpeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:multiply_progress_active_label_text="@string/speed"
+            app:multiply_progress_active_text="Task" />
+
+        <za.co.immedia.component.GoalProgress
+            android:id="@+id/pbDurability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:multiply_progress_active_label_text="@string/durability"
+            app:multiply_progress_active_text="Task" />
+
+        <za.co.immedia.component.GoalProgress
+            android:id="@+id/pbPower"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:multiply_progress_active_label_text="@string/power"
+            app:multiply_progress_active_text="Task" />
+
+        <za.co.immedia.component.GoalProgress
+            android:id="@+id/pbCombat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:multiply_progress_active_label_text="@string/combat"
+            app:multiply_progress_active_text="Task" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
