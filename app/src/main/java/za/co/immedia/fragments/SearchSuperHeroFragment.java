@@ -1,5 +1,6 @@
 package za.co.immedia.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -45,7 +46,6 @@ public class SearchSuperHeroFragment extends Fragment {
 
     private SuperHeroViewModel superHeroViewModel;
     private SuperHeroDatabaseViewModel superHeroDatabaseViewModel;
-    private ProgressDialogHelper mProgressDialogHelper;
 
     public static SearchSuperHeroFragment getInstance() {
 
@@ -56,7 +56,6 @@ public class SearchSuperHeroFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         superHeroViewModel = new SuperHeroViewModel(Objects.requireNonNull(getActivity()).getApplication());
-        mProgressDialogHelper = new ProgressDialogHelper(getContext());
         superHeroDatabaseViewModel = new SuperHeroDatabaseViewModel(getActivity().getApplication());
     }
 
@@ -66,6 +65,20 @@ public class SearchSuperHeroFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_search_super_hero, container, false);
         ButterKnife.bind(this, rootView);
         rvRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppHelper.getInstance().hideKeyboard(getActivity());
+
+                if (!TextUtils.isEmpty(Objects.requireNonNull(etSearch.getText()).toString())) {
+
+                    searchYourFavouriteSuperHero(etSearch.getText().toString());
+                } else {
+                    etSearch.setError("Field can not be empty");
+
+                }
+            }
+        });
         return rootView;
     }
 
@@ -75,16 +88,6 @@ public class SearchSuperHeroFragment extends Fragment {
         getRecent();
     }
 
-
-    @OnClick(R.id.btnSearch)
-    public void onSearchButtonClick() {
-        if (!TextUtils.isEmpty(Objects.requireNonNull(etSearch.getText()).toString())) {
-            mProgressDialogHelper.show();
-            searchYourFavouriteSuperHero(etSearch.getText().toString());
-        } else {
-            etSearch.setError("Field can not be empty");
-        }
-    }
 
     private void searchYourFavouriteSuperHero(String input) {
 
@@ -105,15 +108,14 @@ public class SearchSuperHeroFragment extends Fragment {
                 }
             });
         }
-        mProgressDialogHelper.hide();
     }
 
     private void getRecent() {
         superHeroDatabaseViewModel.getAllData().observe(getViewLifecycleOwner(), new Observer<List<SuperHeroDBModel>>() {
             @Override
             public void onChanged(List<SuperHeroDBModel> superHeroDBModels) {
-                if(superHeroDBModels != null && superHeroDBModels.size() > 0) {
-                    RecentSearchRecyclerViewAdapter recyclerViewAdapter = new RecentSearchRecyclerViewAdapter(getActivity(), superHeroDBModels,superHeroViewModel,SearchSuperHeroFragment.this);
+                if (superHeroDBModels != null && superHeroDBModels.size() > 0) {
+                    RecentSearchRecyclerViewAdapter recyclerViewAdapter = new RecentSearchRecyclerViewAdapter(getActivity(), superHeroDBModels, superHeroViewModel, SearchSuperHeroFragment.this);
                     rvRecycler.setAdapter(recyclerViewAdapter);
                 }
             }
