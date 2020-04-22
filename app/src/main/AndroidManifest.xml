@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name=".SplashActivity"
             android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="za.co.immedia.MainActivity"/>
     </application>
 
 </manifest>
