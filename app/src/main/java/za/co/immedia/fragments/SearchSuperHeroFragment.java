@@ -65,20 +65,7 @@ public class SearchSuperHeroFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_search_super_hero, container, false);
         ButterKnife.bind(this, rootView);
         rvRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppHelper.getInstance().hideKeyboard(getActivity());
 
-                if (!TextUtils.isEmpty(Objects.requireNonNull(etSearch.getText()).toString())) {
-
-                    searchYourFavouriteSuperHero(etSearch.getText().toString());
-                } else {
-                    etSearch.setError("Field can not be empty");
-
-                }
-            }
-        });
         return rootView;
     }
 
@@ -88,6 +75,19 @@ public class SearchSuperHeroFragment extends Fragment {
         getRecent();
     }
 
+
+    @OnClick(R.id.btnSearch)
+    public void onSearchButtonClick() {
+        AppHelper.getInstance().hideKeyboard(getActivity());
+
+        if (!TextUtils.isEmpty(Objects.requireNonNull(etSearch.getText()).toString())) {
+
+            searchYourFavouriteSuperHero(etSearch.getText().toString());
+        } else {
+            etSearch.setError("Field can not be empty");
+
+        }
+    }
 
     private void searchYourFavouriteSuperHero(String input) {
 
