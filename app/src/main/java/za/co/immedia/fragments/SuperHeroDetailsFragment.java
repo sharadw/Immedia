@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-
+import androidx.room.util.StringUtil;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
@@ -56,6 +58,8 @@ public class SuperHeroDetailsFragment extends Fragment {
     TextView tvHeight;
     @BindView(R.id.tvWeight)
     TextView tvWeight;
+    @BindView(R.id.fabButton)
+    FloatingActionButton mFloatingActionButton;
 
 
     public static SuperHeroDetailsFragment getInstance(SuperHeroModel model) {
@@ -85,6 +89,12 @@ public class SuperHeroDetailsFragment extends Fragment {
         try {
             setStats();
             setOtherDetails();
+            mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CompareDialogFragment.getInstance(superHeroModel).show(getParentFragmentManager(),"");
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }

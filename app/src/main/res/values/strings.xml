@@ -31,5 +31,8 @@
     <string name="weight">Weight</string>
     <string name="biography">Biography</string>
     <string name="recent_search">Recent Search</string>
+    <string name="compare">Compare</string>
+    <string name="compare_hero_search">Compare Super Hero</string>
+    <string name="feature">Feature</string>
 
 </resources>

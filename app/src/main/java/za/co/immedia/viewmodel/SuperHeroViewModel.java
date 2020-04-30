@@ -27,55 +27,21 @@ import za.co.immedia.utils.AppConstants;
 public class SuperHeroViewModel extends ViewModel {
 
     private Application mContext;
-    private MutableLiveData<SuperHeroModel> mutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<SuperHeroModel> mutableLiveData;
     private SuperHeroDatabaseViewModel superHeroDatabaseViewModel;
-
 
 
     public SuperHeroViewModel(Application mContext) {
         this.mContext = mContext;
         superHeroDatabaseViewModel = new SuperHeroDatabaseViewModel(mContext);
+
     }
 
     public MutableLiveData<SuperHeroModel> makeRequestById(int id) {
 
-            SuperHeroAPIRepo mApiClient = APIClient.getInstance().getAPIService();
-            Call<SuperHeroModel> personsModel = mApiClient.searchSuperHeroById(BuildConfig.ACCESS_TOKEN,id);
-
-            personsModel.enqueue(new Callback<SuperHeroModel>() {
-                @Override
-                public void onResponse(Call<SuperHeroModel> call, Response<SuperHeroModel> response) {
-                    if (response.isSuccessful()) {
-                        SuperHeroModel model = response.body();
-                        if (model != null && model.getResponse().equalsIgnoreCase(AppConstants.SUCCESS)) {
-                            SuperHeroDBModel superHeroDBModel = new SuperHeroDBModel();
-                            superHeroDBModel.setSuperHeroId(model.getResults().get(0).getId());
-                            superHeroDBModel.setName(model.getResults().get(0).getName());
-                            superHeroDBModel.setUrl(model.getResults().get(0).getImage().getUrl());
-                            superHeroDatabaseViewModel.insert(superHeroDBModel);
-                            mutableLiveData.setValue(model);
-                        }else{
-                            Toast.makeText(mContext,"Character not found",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<SuperHeroModel> call, Throwable t) {
-                    Toast.makeText(mContext,"Character not found",Toast.LENGTH_SHORT).show();
-                    Log.e("SuperHero", "" + t.getMessage());
-                }
-            });
-
-
-        return mutableLiveData;
-
-    }
-
-    public MutableLiveData<SuperHeroModel> makeRequestbyName(String name) {
-
+        mutableLiveData = new MutableLiveData<>();
         SuperHeroAPIRepo mApiClient = APIClient.getInstance().getAPIService();
-        Call<SuperHeroModel> personsModel = mApiClient.searchSuperHeroByName(BuildConfig.ACCESS_TOKEN,name);
+        Call<SuperHeroModel> personsModel = mApiClient.searchSuperHeroById(BuildConfig.ACCESS_TOKEN, id);
 
         personsModel.enqueue(new Callback<SuperHeroModel>() {
             @Override
@@ -89,15 +55,52 @@ public class SuperHeroViewModel extends ViewModel {
                         superHeroDBModel.setUrl(model.getResults().get(0).getImage().getUrl());
                         superHeroDatabaseViewModel.insert(superHeroDBModel);
                         mutableLiveData.setValue(model);
-                    }else{
-                        Toast.makeText(mContext,"Character not found",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, "Character not found", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<SuperHeroModel> call, Throwable t) {
-                Toast.makeText(mContext,"Character not found",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Character not found", Toast.LENGTH_SHORT).show();
+                Log.e("SuperHero", "" + t.getMessage());
+            }
+        });
+
+
+        return mutableLiveData;
+
+    }
+
+    public MutableLiveData<SuperHeroModel> makeRequestbyName(String name) {
+
+        mutableLiveData = new MutableLiveData<>();
+        SuperHeroAPIRepo mApiClient = APIClient.getInstance().getAPIService();
+        Call<SuperHeroModel> personsModel = mApiClient.searchSuperHeroByName(BuildConfig.ACCESS_TOKEN, name);
+
+        personsModel.enqueue(new Callback<SuperHeroModel>() {
+            @Override
+            public void onResponse(Call<SuperHeroModel> call, Response<SuperHeroModel> response) {
+                if (response.isSuccessful()) {
+                    SuperHeroModel model = response.body();
+                    if (model != null && model.getResponse().equalsIgnoreCase(AppConstants.SUCCESS)) {
+                        SuperHeroDBModel superHeroDBModel = new SuperHeroDBModel();
+                        superHeroDBModel.setSuperHeroId(model.getResults().get(0).getId());
+                        superHeroDBModel.setName(model.getResults().get(0).getName());
+                        superHeroDBModel.setUrl(model.getResults().get(0).getImage().getUrl());
+                        superHeroDatabaseViewModel.insert(superHeroDBModel);
+                        mutableLiveData.setValue(model);
+                    } else {
+                        mutableLiveData.setValue(null);
+                        Toast.makeText(mContext, "Character not found", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuperHeroModel> call, Throwable t) {
+                Toast.makeText(mContext, "Character not found", Toast.LENGTH_SHORT).show();
                 Log.e("SuperHero", "" + t.getMessage());
             }
         });

@@ -20,13 +20,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-       /* if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_main_landscape);
-            AppHelper.getInstance().addFragment(this, MasterFragment.getInstance(true), false);
-        }
-        else {
-            setContentView(R.layout.activity_main);
-            AppHelper.getInstance().addFragment(this, SearchSuperHeroFragment.getInstance(), false);
-        }*/
+
     }
 }

@@ -22,6 +22,7 @@ import za.co.immedia.model.SuperHeroModel;
 import za.co.immedia.presenter.SuperHeroPresenter;
 import za.co.immedia.utils.AppConstants;
 import za.co.immedia.utils.AppHelper;
+import za.co.immedia.utils.ProgressDialogHelper;
 import za.co.immedia.viewmodel.SuperHeroDatabaseViewModel;
 import za.co.immedia.viewmodel.SuperHeroViewModel;
 
@@ -32,6 +33,7 @@ public class RecentSearchRecyclerViewAdapter extends RecyclerView.Adapter<Recent
     private LayoutInflater mLayoutInflater;
     private SuperHeroViewModel superHeroViewModel;
     private SearchSuperHeroFragment searchSuperHeroFragment;
+    private ProgressDialogHelper progressDialogHelper;
 
 
     public RecentSearchRecyclerViewAdapter(FragmentActivity parent, List<SuperHeroDBModel> items, SuperHeroViewModel superHeroViewModel, SearchSuperHeroFragment searchSuperHeroFragment) {
@@ -39,6 +41,7 @@ public class RecentSearchRecyclerViewAdapter extends RecyclerView.Adapter<Recent
         this.mContext = parent;
         this.superHeroViewModel = superHeroViewModel;
         this.searchSuperHeroFragment = searchSuperHeroFragment;
+        progressDialogHelper = new ProgressDialogHelper(mContext);
     }
 
 
@@ -63,11 +66,14 @@ public class RecentSearchRecyclerViewAdapter extends RecyclerView.Adapter<Recent
             holder.cvRoundedCornerCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    progressDialogHelper.show();
                     superHeroViewModel.makeRequestbyName(superHeroModel.getName()).observe(searchSuperHeroFragment.getViewLifecycleOwner(), new Observer<SuperHeroModel>() {
                         @Override
                         public void onChanged(SuperHeroModel superHeroModel) {
-                            if (superHeroModel.getResponse().equalsIgnoreCase(AppConstants.SUCCESS))
+                            if (superHeroModel != null && superHeroModel.getResponse().equalsIgnoreCase(AppConstants.SUCCESS))
                                 AppHelper.getInstance().addFragment(mContext, SuperHeroDetailsFragment.getInstance(superHeroModel), true);
+
+                            progressDialogHelper.hide();
                         }
                     });
                 }

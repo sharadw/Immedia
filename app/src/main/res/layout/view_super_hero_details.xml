@@ -70,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/medium_margin"
                 android:text="@string/weight" />
         </LinearLayout>
 
@@ -125,7 +126,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/small_padding"
+                android:layout_marginBottom="@dimen/medium_margin"
                 android:text="@string/weight" />
         </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
